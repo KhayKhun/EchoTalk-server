@@ -3,7 +3,6 @@ import { createServer } from 'http'
 import { Server } from 'socket.io'
 import cors from 'cors'
 import config from 'config'
-import logger from './utils/logger'
 
 import socket from './socket'
 
@@ -26,7 +25,7 @@ app.get('/', (req, res) => {
 })
 
 httpServer.listen(port,host, () => {
-    logger.info("  Server is listening ")
+    console.log("  Server is listening ")
 
     socket({io})
 })

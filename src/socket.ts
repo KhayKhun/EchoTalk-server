@@ -1,5 +1,4 @@
 import {Server,Socket} from 'socket.io'
-import logger from './utils/logger'
 import {v4} from 'uuid'
 
 const EVENTS = {
@@ -21,13 +20,15 @@ const EVENTS = {
 
 const rooms:Record<string, {name : string , owner : string}> = {}
 
+const joinedRooms = <string[]>[]
+
 function socket({io} : {io : Server}){
-    logger.info('Socket enabled')
 
     io.on(EVENTS.connection,(socket : Socket) => {
-        logger.info(`User connected: ${socket.id}`)
+        // logger.info(`User connected: ${socket.id}`)
         
     socket.on(EVENTS.CLIENT.CREATE_ROOM,({roomName , owner}) => {
+        const date = new Date();
         const roomId = v4()
 
         rooms[roomId] = {
@@ -41,7 +42,14 @@ function socket({io} : {io : Server}){
         socket.emit(EVENTS.SERVER.ROOMS, rooms)
         // emit back to room creator saying you hav joined a room
         socket.join(roomId)
-        socket.emit(EVENTS.SERVER.JOINED_ROOM, {roomId, roomName : rooms[roomId].name})
+        socket.emit(EVENTS.SERVER.JOINED_ROOM, {
+            roomId,
+            roomName : rooms[roomId].name,
+            username : owner,
+            time : `${date.getHours()}:${date.getMinutes()}`,
+            message : `${owner} created the server`
+        })
+        joinedRooms.push(roomId)
     })
 
     socket.on(EVENTS.CLIENT.SEND_ROOM_MESSAGE, ({message, roomId, username})=>{
@@ -54,10 +62,26 @@ function socket({io} : {io : Server}){
             time : `${date.getHours()}:${date.getMinutes()}`
         })
     })
-
+// Join room message issue 
     socket.on(EVENTS.CLIENT.JOIN_ROOM, ({joinRoomId , roomName}) => {
+        
+        const isJoined = joinedRooms.includes(joinRoomId)
+        // console.log(isJoined)
+        const date = new Date();
+        if(isJoined){
+            socket.join(joinRoomId)
+        }
+        socket.emit(EVENTS.SERVER.JOIN_ROOM , {
+            joinRoomId,
+            roomName,
+            time : `${date.getHours()}:${date.getMinutes()}`,
+            // to show 'You joined message'
+            message : isJoined ? undefined : 'You joined the server'
+        })
         socket.join(joinRoomId)
-        socket.emit(EVENTS.SERVER.JOIN_ROOM , {joinRoomId, roomName})
+        if(!joinedRooms.includes(joinRoomId)){
+            joinedRooms.push(joinRoomId);
+        }
     })
 
     socket.on(EVENTS.CLIENT.FRESHER,({})=>{
