@@ -2,9 +2,8 @@
     "name" : "echotalk-server",
     "version" : 2,
     "buildCommand" : "npm run build",
-    "devCommand" : "npm run dev",
     "installCommand" : "npm install",
     "builds" : [
-        { "src": "/(.*)", "use": "@vercel/node" }
+        { "src": "*.js", "use": "@vercel/node" }
     ]
 }
