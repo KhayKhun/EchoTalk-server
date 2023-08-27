@@ -9,6 +9,7 @@ import socket from './socket'
 const config = require('config');
 
 const port = config.get('port');
+console.log(port)
 const host = config.get('host');
 const corsOrigin = config.get('corsOrigin');
 

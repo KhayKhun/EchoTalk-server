@@ -1,5 +1,5 @@
 {
   "port": 5000,
   "host": "https://echo-talk-server.vercel.app",
-  "corsOrigin": "http://localhost:3000"
+  "corsOrigin": "https://echotalk.vercel.app/"
 }
