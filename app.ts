@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv';
+dotenv.config()
 import express from 'express'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
@@ -24,8 +26,8 @@ app.get('/', (req, res) => {
     res.send('Server is up')
 })
 
-httpServer.listen(port,host, () => {
-    console.log("  Server is listening ")
+httpServer.listen(port || process.env.PORT, () => {
+    console.log("  Server is listening on" + port + process.env.PORT)
 
     socket({io})
 })
