@@ -4,6 +4,6 @@
     "buildCommand" : "npm run build",
     "installCommand" : "npm install",
     "builds" : [
-        { "src": "*.js", "use": "@vercel/node" }
+        { "src": "*.{js,ts}", "use": "@vercel/node" }
     ]
 }
