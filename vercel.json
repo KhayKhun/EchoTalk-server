@@ -3,8 +3,7 @@
     "version" : 2,
     "buildCommand" : "npm run build",
     "installCommand" : "npm install",
-    "builds": [
-    { "src": "*.js", "use": "@vercel/node", "config": { "NODE_ENV": "production" } }
-]
-
+    "builds" : [
+        { "src": "*.{js,ts}", "use": "@vercel/node" }
+    ]
 }
