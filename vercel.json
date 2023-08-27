@@ -4,8 +4,7 @@
     "buildCommand" : "npm run build",
     "installCommand" : "npm install",
     "builds": [
-    { "src": "*.js", "use": "@vercel/node", "config": { "NODE_ENV": "production" } },
-    { "src": "*.ts", "use": "npm run build", "config": { "NODE_ENV": "production" } }
+    { "src": "*.js", "use": "@vercel/node", "config": { "NODE_ENV": "production" } }
 ]
 
 }
