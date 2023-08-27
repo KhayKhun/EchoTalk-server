@@ -8,7 +8,6 @@ import config from 'config'
 
 import socket from './socket'
 
-const port = config.get<number>("port")
 const host = config.get<string>("host")
 const corsOrigin = config.get<string>("corsOrigin")
 const app = express()
