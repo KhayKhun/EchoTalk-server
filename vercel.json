@@ -3,9 +3,6 @@
     "version" : 2,
     "buildCommand" : "npm run build",
     "installCommand" : "npm install",
-    "engines" : {
-        "node" : "18.x"
-    },
     "builds" : [
         { "src": "*.js", "use": "@vercel/node" }
     ]
