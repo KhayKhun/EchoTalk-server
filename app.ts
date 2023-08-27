@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 })
 
 httpServer.listen(process.env.NODE_ENV === 'production' ? process.env.PORT : port , () => {
-    console.log("  Server is listening on" + port + process.env.PORT)
+    console.log("  Server is listening")
 
     socket({io})
 })

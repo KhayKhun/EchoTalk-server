@@ -48,7 +48,7 @@ const io = new socket_io_1.Server(httpServer, {
 app.get('/', (req, res) => {
     res.send('Server is up');
 });
-httpServer.listen(port || process.env.PORT, () => {
-    console.log("  Server is listening ");
+httpServer.listen(process.env.NODE_ENV === 'production' ? process.env.PORT : port, () => {
+    console.log("  Server is listening on" + port + process.env.PORT);
     (0, socket_1.default)({ io });
 });
