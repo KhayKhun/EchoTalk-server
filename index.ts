@@ -6,13 +6,19 @@ import { Server } from 'socket.io'
 // import cors from 'cors'
 import socket from './socket'
 
+const config = require('config');
+
+const port = config.get('port');
+const host = config.get('host');
+const corsOrigin = config.get('corsOrigin');
+
 const app = express()
 
 const httpServer = createServer(app)
 
 const io = new Server(httpServer , {
     cors: {
-        origin : "http://localhost:3000",
+        origin : corsOrigin,
         credentials : true
     }
 });
@@ -21,8 +27,8 @@ app.get('/', (_, res) => {
     res.send('Server is up')
 })
 
-httpServer.listen(process.env.PORT,3000, () => {
-    console.log("Server is listening on "+process.env.PORT)
+httpServer.listen(port,host, () => {
+    console.log("Server is listening on "+port)
 
     socket({io})
 })
