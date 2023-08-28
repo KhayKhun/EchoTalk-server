@@ -35,6 +35,7 @@ const socket_io_1 = require("socket.io");
 const socket_1 = __importDefault(require("./socket"));
 const config = require('config');
 const port = config.get('port');
+console.log(port);
 const host = config.get('host');
 const corsOrigin = config.get('corsOrigin');
 const app = (0, express_1.default)();
