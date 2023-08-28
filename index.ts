@@ -6,20 +6,13 @@ import { Server } from 'socket.io'
 // import cors from 'cors'
 import socket from './socket'
 
-const config = require('config');
-
-const port = config.get('port');
-console.log(port)
-const host = config.get('host');
-const corsOrigin = config.get('corsOrigin');
-
 const app = express()
 
 const httpServer = createServer(app)
 
 const io = new Server(httpServer , {
     cors: {
-        origin : corsOrigin,
+        origin : "https://echotalk.vercel.app/",
         credentials : true
     }
 });
@@ -28,8 +21,8 @@ app.get('/', (_, res) => {
     res.send('Server is up')
 })
 
-httpServer.listen(port,host, () => {
-    console.log("Server is listening on "+port)
+httpServer.listen(5000,"localhost", () => {
+    console.log("Server is listening on "+5000)
 
     socket({io})
 })
