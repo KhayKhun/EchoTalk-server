@@ -11,5 +11,8 @@
             "source": "(.*)",
             "destination": "."
         }
-    ]
+    ],
+  "port": 5000,
+  "host": "localhost",
+  "corsOrigin": "https://echotalk.vercel.app/"
 }
